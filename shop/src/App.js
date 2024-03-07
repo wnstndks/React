@@ -92,6 +92,11 @@ function App() {
           {/* /about/member로 접속시 */}
           <Route path="location" element={<div>위치정보임</div>} />
         </Route>
+
+        <Route path="/event" element={<Event/>}>
+          <Route path="one" element={<div>첫 주문시 양배추즙 서비스</div>}/>
+          <Route path="two" element={<div>생일기념 쿠폰받기</div>}/>
+        </Route>
       </Routes>
     </div>
   );
@@ -117,4 +122,12 @@ function About() {
   );
 }
 
+function Event(){
+  return(
+    <div>
+      <h4>오늘의 이벤트</h4>
+      <Outlet></Outlet>
+    </div>
+  )
+}
 export default App;
