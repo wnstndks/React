@@ -62,7 +62,7 @@ function App() {
                 <Row>
                   {shoes.map(function (a, i) {
                     return (
-                      <Col>
+                      <Col key={i}>
                         <img
                           src={`https://codingapple1.github.io/shop/shoes${
                             i + 1
@@ -80,23 +80,27 @@ function App() {
           }
         />
         {/* 누가 /로 접속할때 element안에 들어있는걸 보여줌 */}
-        <Route path="/detail" element={<DetailCard />} />
+        {/* 페이지 여러개 만들고 싶으면 :URL 파라미터 써도 됨 */}
+        {/* /detail/아무거나라는 뜻 => 상세페이지 수백만개 만들 수 있음, 파라미터 만들때 여러개 가능 */}
+        {/* id라는 값에 고유 키값이 들어가야된다는 뜻 아닌가? */}
+        <Route path="/detail/:id" element={<DetailCard shoes={shoes}/>} />
+
         {/* 누가 /detail로 접속할때 element안에 들어있는걸 보여줌 */}
         <Route path="*" element={<div>없는 페이지</div>} />
         {/* 없는 페이지 */}
 
         {/* Nested Routes - 여러 페이지 필요할때, 여러 유사한 페이지 필요할 때, */}
 
-        <Route path="/about" element={<About/>}>
+        {/* <Route path="/about" element={<About/>}>
           <Route path="member" element={<div>멤버임</div>} /> 
-          {/* /about/member로 접속시 */}
+          {/* /about/member로 접속시 
           <Route path="location" element={<div>위치정보임</div>} />
-        </Route>
+        </Route> */}
 
-        <Route path="/event" element={<Event/>}>
+        {/* <Route path="/event" element={<Event/>}>
           <Route path="one" element={<div>첫 주문시 양배추즙 서비스</div>}/>
           <Route path="two" element={<div>생일기념 쿠폰받기</div>}/>
-        </Route>
+        </Route> */}
       </Routes>
     </div>
   );
@@ -112,22 +116,22 @@ function App() {
 //   );
 // }
 
-function About() {
-  return (
-    <div>
-      <h4>회사정보임</h4>
-      {/* nested Router를 보여줄 자리는 Outlet이용 */}
-      <Outlet></Outlet>
-    </div>
-  );
-}
+// function About() {
+//   return (
+//     <div>
+//       <h4>회사정보임</h4>
+//       {/* nested Router를 보여줄 자리는 Outlet이용 */}
+//       <Outlet></Outlet>
+//     </div>
+//   );
+// }
 
-function Event(){
-  return(
-    <div>
-      <h4>오늘의 이벤트</h4>
-      <Outlet></Outlet>
-    </div>
-  )
-}
+// function Event(){
+//   return(
+//     <div>
+//       <h4>오늘의 이벤트</h4>
+//       <Outlet></Outlet>
+//     </div>
+//   )
+// }
 export default App;
