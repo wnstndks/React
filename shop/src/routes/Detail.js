@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Container, Navbar, Nav, Col, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 function DetailCard(props) {
     return (
