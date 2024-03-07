@@ -6,6 +6,7 @@ import { useState } from "react";
 // 경로는 무조건 ./ 부터
 import data from "./data.js";
 import { Routes, Route, Link } from "react-router-dom";
+import DetailCard from "./routes/Detail.js";
 
 function App() {
   // 길고 복잡한 데이터들은 다른 js파일에 빼둘수 있음
@@ -60,7 +61,7 @@ function App() {
           }
         />
         {/* 누가 /로 접속할때 element안에 들어있는걸 보여줌 */}
-        <Route path="/detail" element={<div>상세페이지임</div>} />
+        <Route path="/detail" element={<div><DetailCard/></div>} />
         {/* 누가 /detail로 접속할때 element안에 들어있는걸 보여줌 */}
       </Routes>
     </div>
@@ -76,5 +77,7 @@ function App() {
 //     </Col>
 //   );
 // }
+
+
 
 export default App;
