@@ -1,4 +1,5 @@
 import logo from "./logo.svg";
+// css 파일 작명할 때 다른것에 오염방지하려면 컴포넌트명.module.css
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container, Navbar, Nav, Col, Row } from "react-bootstrap";
