@@ -5,16 +5,16 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 /* classname들을 styled-compoents 쓰면 JS파일에서 전부해결가능 */
-// let YellowBtn = styled.button`
-//   background: yellow;
-//   color: black;
-//   padding: 10px;
-// `;
+let YellowBtn = styled.button`
+  background: yellow;
+  color: black;
+  padding: 10px;
+`;
 
-// let Box = styled.div`
-//   background: grey;
-//   paddding: 20px;
-// `;
+let Box = styled.div`
+  background: grey;
+  paddding: 20px;
+`;
 
 // 컴포넌트의 Lifecycle 
 //  페이지에 장착되기도 하고(mount) 
@@ -66,11 +66,12 @@ function DetailCard(props) {
   // URL 파라미터에 이상한거 입력하면? - if문 사용
   return (
     <Container>
+
       {count}
       <button onClick={()=>{setCount(count+1)}}>버튼</button>
-      {/* <Box>
+      <Box>
         <YellowBtn>버튼</YellowBtn>
-      </Box> */}
+      </Box>
       <Row>
         <div className="col-md-6">
           <img
