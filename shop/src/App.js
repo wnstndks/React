@@ -8,10 +8,12 @@ import { useState } from "react";
 import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import DetailCard from "./routes/Detail.js";
+// ajax axios 불러오기
+import axios from "axios";
 
 function App() {
   // 길고 복잡한 데이터들은 다른 js파일에 빼둘수 있음
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
 
   // 페이지 이동도와주는 useNavigate() - 함수가 들어가있음
   let navigate = useNavigate();
@@ -77,14 +79,40 @@ function App() {
                   })}
                 </Row>
               </Container>
+              {/* ajax 쓰려면 택1 XMLHttpRequest, fetch(), axios*/}
+              <button
+                onClick={() => {
+                  // ajax를 이용한 GET요청은 axios.get('url')
+                  axios
+                    .get("https://codingapple1.github.io/shop/data2.json")
+                    .then((결과) => {
+                      // 가져온 데이터들을 shoes라는 state에 추가
+                      let copy=[...shoes,...결과.data];
+                      setShoes(copy);
+                      
+                    })
+                    // 동시에 ajax 요청 여러개 하려면
+                    // Promise.all([axios.get('/url1'),axios.get('/url1')])
+                    // 파라미터를 추가하면 실제로 서버에서 가져온 데이터
+                    // ajax요청 실패할 경우
+                    // 원래 서버와는 문자만 주고 받을 수 있지만 따옴표쳐놓을시 array나 object도 주고 받을 수 있음-JSON데이터
+                    // fetch로도 가져올수 있지만 변환을 직접해주어야 함 그래서 axios를 사용
+                    
+                    .catch((e) => {
+                      console.log(e);
+                    });
+                }}
+              >
+                더보기
+              </button>
             </div>
           }
         />
         {/* 누가 /로 접속할때 element안에 들어있는걸 보여줌 */}
         {/* 페이지 여러개 만들고 싶으면 :URL 파라미터 써도 됨 */}
-        {/* /detail/아무거나라는 뜻 => 상세페이지 수백만개 만들 수 있음, 파라미터 만들때 여러개 가능 */}
+        {/* /detail/아무거나 라는 뜻 => 상세페이지 수백만개 만들 수 있음, 파라미터 만들때 여러개 가능 */}
         {/* id라는 값에 고유 키값이 들어가야된다는 뜻 아닌가? */}
-        <Route path="/detail/:id" element={<DetailCard shoes={shoes}/>} />
+        <Route path="/detail/:id" element={<DetailCard shoes={shoes} />} />
 
         {/* 누가 /detail로 접속할때 element안에 들어있는걸 보여줌 */}
         <Route path="*" element={<div>없는 페이지</div>} />
