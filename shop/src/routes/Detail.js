@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { Button, Navbar, Nav, Col } from "react-bootstrap";
 
 /* classname들을 styled-compoents 쓰면 JS파일에서 전부해결가능 */
 // let YellowBtn = styled.button`
@@ -60,36 +61,33 @@ function DetailCard(props) {
 
   // 타이머 - 주는 법 : setTimeout(()=>{실행할코드},1000), 1000은 1초
 
+  let [탭, 탭변경] = useState(0);
   useEffect(() => {
     setTimeout(() => {
       // 스위치 조작해주세요 - 리액트 방식 UI 상태 저장할 state 만들고 state 따라서 UI가 어떻게 보일지 작성
       setAlert(false);
     }, 2000);
-    
-    return()=>{
+
+    return () => {
       // 이 안의 코드들은 useEffect 동적전에 실행됨
       //  - clean up function - 기존코드 지울때 많이 사용함 - 초기화 작업해주는거 같은데?
       // clearTimeout(a)
-      // 기존 타이머는 제거해주세요 
-
+      // 기존 타이머는 제거해주세요
       // 기존 데이터요청은 제거해주세요~할때도 사용
-
       // clean up functiondms mount시 실행안됨, unmount시 실행됨
-    }
+    };
 
     // useEffect 실행조건 넣을수 있는 곳은 [] -dependencey
     // dependency를 추가하면 안에 넣은 변수가 변할 때마다 실행이됨
     // dependency가 없을 떄는 컴포넌트 mount시 일회만 실행하고 싶을 떄 사용
-  },[]);
+  }, []);
 
   // useEffect(()=>{}) 1.재렌더링마다 코드 실행하고 싶다.
-  // useEffect(()=>{},[]) 2.mount시 1회 코드실행하고 싶으면 
+  // useEffect(()=>{},[]) 2.mount시 1회 코드실행하고 싶으면
   // useEffect(()=>{
-    // 3.unmount시 1회 코드실행하고 싶을때
-  // },[]) 
+  // 3.unmount시 1회 코드실행하고 싶을때
+  // },[])
   //4. useEffect 실행전에 뭔가 실행하려면 언제나 return()=>{}
-
-
 
   let [input, setInput] = useState(true);
 
@@ -97,7 +95,6 @@ function DetailCard(props) {
   // URL 파라미터에 이상한거 입력하면? - if문 사용
   return (
     <Container>
-
       {alert == true ? (
         <div className="alert alert-warning">2초 이내 구매시 할인</div>
       ) : null}
@@ -127,12 +124,43 @@ function DetailCard(props) {
           <p>{찾은상품.price}</p>
           <button className="btn btn-danger">주문하기</button>
         </div>
-        {input == true ? (
-        <input></input>
-      ) : null}
       </Row>
+      {/* 탭 UI 만들기 1.html css로 미리 디자인 2. 탭 상태 저장해둘 state 필요 3.state에 따라 UI가 어떻게 보일지 작성*/}
+      <Nav variant="tabs" defaultActiveKey="link0">
+        <Nav.Item>
+          <Nav.Link onClick={()=>{탭변경(0)}} eventKey="link0">버튼0</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={()=>{탭변경(1)}} eventKey="link1">버튼1</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={()=>{탭변경(2)}} eventKey="link2">버튼2</Nav.Link>
+        </Nav.Item>
+      </Nav>
+      {/*  삼항연산자{
+        탭 ==0 ? <div>내용0</div>:null
+      }{
+        
+        탭 ==1 ? <div>내용1</div>:null
+      }{
+        
+        탭 ==2 ? <div>내용2</div>:null
+      } */}
+      <TabContent 탭={탭}/>
     </Container>
   );
 }
 
+function TabContent({탭}) {
+  // 일반 if조건문
+  if (탭 == 0) {
+    return <div>내용0</div>
+  } if (탭 == 1) {
+    return <div>내용1</div>
+  } if (탭 == 2) {
+    return <div>내용2</div>
+  }
+
+  // 또는 return [<div>내용0</div>,<div>내용1</div>,<div>내용2</div>][탭]
+}
 export default DetailCard;
