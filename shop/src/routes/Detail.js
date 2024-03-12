@@ -34,6 +34,8 @@ import { Button, Navbar, Nav, Col } from "react-bootstrap";
 
 // App->detail 컴포넌트에 데이터 전송
 function DetailCard(props) {
+
+  
   // 컴포넌트에 갈고리 다는법
   // useEffect 안에 있는 코드는 랜더링이 되고 나서(html이 다 그려지고 나서) 나중에 실행이됨 - 위에서 임포트 안에는 함수 쓰기
   // 안에 적은 코드는 detailcomponent가 처음장착또는 업데이트될때 실행해줌
@@ -128,13 +130,34 @@ function DetailCard(props) {
       {/* 탭 UI 만들기 1.html css로 미리 디자인 2. 탭 상태 저장해둘 state 필요 3.state에 따라 UI가 어떻게 보일지 작성*/}
       <Nav variant="tabs" defaultActiveKey="link0">
         <Nav.Item>
-          <Nav.Link onClick={()=>{탭변경(0)}} eventKey="link0">버튼0</Nav.Link>
+          <Nav.Link
+            onClick={() => {
+              탭변경(0);
+            }}
+            eventKey="link0"
+          >
+            버튼0
+          </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link onClick={()=>{탭변경(1)}} eventKey="link1">버튼1</Nav.Link>
+          <Nav.Link
+            onClick={() => {
+              탭변경(1);
+            }}
+            eventKey="link1"
+          >
+            버튼1
+          </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link onClick={()=>{탭변경(2)}} eventKey="link2">버튼2</Nav.Link>
+          <Nav.Link
+            onClick={() => {
+              탭변경(2);
+            }}
+            eventKey="link2"
+          >
+            버튼2
+          </Nav.Link>
         </Nav.Item>
       </Nav>
       {/*  삼항연산자{
@@ -146,21 +169,39 @@ function DetailCard(props) {
         
         탭 ==2 ? <div>내용2</div>:null
       } */}
-      <TabContent 탭={탭}/>
+      <TabContent 탭={탭} />
     </Container>
   );
 }
 
-function TabContent({탭}) {
+function TabContent({ 탭 }) {
   // 일반 if조건문
-  if (탭 == 0) {
-    return <div>내용0</div>
-  } if (탭 == 1) {
-    return <div>내용1</div>
-  } if (탭 == 2) {
-    return <div>내용2</div>
-  }
+  // if (탭 == 0) {
+  //   return <div>내용0</div>
+  // } if (탭 == 1) {
+  //   return <div>내용1</div>
+  // } if (탭 == 2) {
+  //   return <div>내용2</div>
+  // }
 
-  // 또는 return [<div>내용0</div>,<div>내용1</div>,<div>내용2</div>][탭]
+  //  전환애니메이션은  부착하면 애니메이션 나오는 className하나 만들고 원할 때 부착하면 됨
+  // 1.애니메이션 동작 전 clasName만들기 2.  애니메이션 동작 후 className  만들기 3. className에 transition 속성 추가 4. 원할 때 2번 className 부착
+  
+  let [fade, setFade] = useState('')
+  useEffect(()=>{
+    // 리액트의 automatic batching 기능으로 인하여 한번에 다같이 바꿔주기에 시간차를 둬서 실행해야함
+    setTimeout(()=>{setFade('end')},100)
+
+    return ()=>{
+      setFade('')
+    }
+  },[탭])
+
+  return (
+    <div className={`start ${fade}`}>
+      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+    </div>
+  );
 }
+
 export default DetailCard;
