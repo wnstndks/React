@@ -1,9 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Button, Navbar, Nav, Col } from "react-bootstrap";
+
+// Context import
+import { Context1 } from "./../App.js";
 
 /* classname들을 styled-compoents 쓰면 JS파일에서 전부해결가능 */
 // let YellowBtn = styled.button`
@@ -35,6 +38,8 @@ import { Button, Navbar, Nav, Col } from "react-bootstrap";
 // App->detail 컴포넌트에 데이터 전송
 function DetailCard(props) {
 
+  // state 사용은 useContext(Context)
+  let {재고, shoes}= useContext(Context1)
   
   // 컴포넌트에 갈고리 다는법
   // useEffect 안에 있는 코드는 랜더링이 되고 나서(html이 다 그려지고 나서) 나중에 실행이됨 - 위에서 임포트 안에는 함수 쓰기
@@ -92,6 +97,7 @@ function DetailCard(props) {
   //4. useEffect 실행전에 뭔가 실행하려면 언제나 return()=>{}
 
   let [input, setInput] = useState(true);
+
 
   // 복사본을 하나 만들어내면 관리하기 매우 힘들기에 데이터는 한곳에만 잘 보관
   // URL 파라미터에 이상한거 입력하면? - if문 사용
@@ -169,12 +175,14 @@ function DetailCard(props) {
         
         탭 ==2 ? <div>내용2</div>:null
       } */}
-      <TabContent 탭={탭} />
+      {/* props 싫으면 Context API 사용 근데 별로 사용하진 않음 */}
+      <TabContent shoes={props.shoes} 탭={탭} />
     </Container>
   );
 }
 
-function TabContent({ 탭 }) {
+function TabContent({ 탭, shoes}) {
+
   // 일반 if조건문
   // if (탭 == 0) {
   //   return <div>내용0</div>
@@ -199,7 +207,7 @@ function TabContent({ 탭 }) {
 
   return (
     <div className={`start ${fade}`}>
-      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+      {[<div>{shoes[0].title}</div>, <div>내용1</div>, <div>내용2</div>][탭]}
     </div>
   );
 }

@@ -3,13 +3,16 @@ import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container, Navbar, Nav, Col, Row } from "react-bootstrap";
-import { useState } from "react";
+import { createContext, useState } from "react";
 // 경로는 무조건 ./ 부터
 import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import DetailCard from "./routes/Detail.js";
 // ajax axios 불러오기
 import axios from "axios";
+
+// contextAPI를 쓰면 자식은 props없이 state 사용가능 1.createContext() 2. <Context>로 원하는 컴포넌트 감싸기
+export let Context1 = createContext();
 
 function App() {
   // 길고 복잡한 데이터들은 다른 js파일에 빼둘수 있음
@@ -18,11 +21,12 @@ function App() {
   // 페이지 이동도와주는 useNavigate() - 함수가 들어가있음
   let navigate = useNavigate();
 
+  let [재고] = useState([10, 11, 12]);
+
   // 페이지 나누는 법(리액트)
   // 컴포넌트 만들어서 상세페이지 내용 채움
   // 누가/detail 접속하면 그 컴포넌트 보여줌
   // react-router-dom 라이브러리 쓰기(라우팅)
-
   return (
     <div className="App">
       <Navbar bg="dark" data-bs-theme="dark">
@@ -87,9 +91,8 @@ function App() {
                     .get("https://codingapple1.github.io/shop/data2.json")
                     .then((결과) => {
                       // 가져온 데이터들을 shoes라는 state에 추가
-                      let copy=[...shoes,...결과.data];
+                      let copy = [...shoes, ...결과.data];
                       setShoes(copy);
-                      
                     })
                     // 동시에 ajax 요청 여러개 하려면
                     // Promise.all([axios.get('/url1'),axios.get('/url1')])
@@ -97,7 +100,7 @@ function App() {
                     // ajax요청 실패할 경우
                     // 원래 서버와는 문자만 주고 받을 수 있지만 따옴표쳐놓을시 array나 object도 주고 받을 수 있음-JSON데이터
                     // fetch로도 가져올수 있지만 변환을 직접해주어야 함 그래서 axios를 사용
-                    
+
                     .catch((e) => {
                       console.log(e);
                     });
@@ -112,7 +115,15 @@ function App() {
         {/* 페이지 여러개 만들고 싶으면 :URL 파라미터 써도 됨 */}
         {/* /detail/아무거나 라는 뜻 => 상세페이지 수백만개 만들 수 있음, 파라미터 만들때 여러개 가능 */}
         {/* id라는 값에 고유 키값이 들어가야된다는 뜻 아닌가? */}
-        <Route path="/detail/:id" element={<DetailCard shoes={shoes} />} />
+        <Route
+          path="/detail/:id"
+          element={
+            // ContextProvider - {}로 감싼것들은 props없이도 가져다 쓸수 있음
+            <Context1.Provider value={{재고, shoes}}>
+              <DetailCard shoes={shoes} />
+            </Context1.Provider>
+          }
+        />
 
         {/* 누가 /detail로 접속할때 element안에 들어있는걸 보여줌 */}
         <Route path="*" element={<div>없는 페이지</div>} />
