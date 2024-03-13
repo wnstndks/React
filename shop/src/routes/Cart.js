@@ -2,12 +2,12 @@ import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 // state변경하기 위해 만든 함수 import 해서 사용
-import { changeName } from "./../store.js";
+import { changeName,changeAge } from "./../store.js";
 
 function Cart() {
   // store에 있던 componente가져다쓰기
   let state = useSelector((state) => {
-    return state.cart;
+    return state;
   });
   console.log(state);
 
@@ -19,8 +19,13 @@ function Cart() {
 
   // 컴포넌트간 공유가 필요없으면 그냥 useState() 쓰는게 좋음
   return (
+
     // Redux사용시 컴포넌트들이 props없이 state공유가능
     <div>
+      <h6>{state.user.name}{state.user.age}의 장바구니</h6>
+      <button onClick={()=>{
+        dispatch(changeAge())
+      }}>버튼</button>
       <Table>
         <thead>
           <tr>
@@ -32,7 +37,7 @@ function Cart() {
           </tr>
         </thead>
         <tbody>
-          {state.map((a, i) => (
+          {state.cart.map((a, i) => (
             <tr key={i}>
               <td>{a.id}</td>
               <td>{a.name}</td>
