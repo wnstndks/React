@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // state변경하기 위해 만든 함수 import 해서 사용
 import { changeName,changeAge } from "./../store/userSlice.js"
+import { increaseCount } from "./../store.js";
 
 function Cart() {
   // store에 있던 componente가져다쓰기
@@ -45,7 +46,8 @@ function Cart() {
               <td>
                 <button onClick={()=>{
                   // dispatch를 붙여야 함수사용가능
-                  dispatch(changeName())
+                  // a.id값을 가져와서 그에 해당하는 count에 increaCount를 해야해
+                  dispatch(increaseCount(state.cart[i].id))
                 }}>+</button>
               </td>
             </tr>
