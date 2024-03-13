@@ -50,10 +50,13 @@ let cart = createSlice({
       // payload와 같은 id가진 상품 찾아서 +1
       let 번호 = state.findIndex((a)=>{return a.id === action.payload})
       state[번호].count+=1
+    },
+    addItem(state,action){
+      state.push(action.payload)
     }
   }
 })
-export let {increaseCount} = cart.actions
+export let {increaseCount,addItem} = cart.actions
 
 export default configureStore({
   reducer: { 

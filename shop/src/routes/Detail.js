@@ -4,6 +4,9 @@ import { Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Button, Navbar, Nav, Col } from "react-bootstrap";
+// store.js에서 함수가져오기
+import { addItem } from "./../store";
+import { useDispatch } from "react-redux";
 
 // Context import
 // import { Context1 } from "./../App.js";
@@ -99,6 +102,11 @@ function DetailCard(props) {
   let [input, setInput] = useState(true);
 
 
+
+  
+  let dispatch=useDispatch()
+
+
   // 복사본을 하나 만들어내면 관리하기 매우 힘들기에 데이터는 한곳에만 잘 보관
   // URL 파라미터에 이상한거 입력하면? - if문 사용
   return (
@@ -130,7 +138,10 @@ function DetailCard(props) {
           <h4 className="pt-5">{찾은상품.title}</h4>
           <p>{찾은상품.content}</p>
           <p>{찾은상품.price}</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button className="btn btn-danger"
+          onClick={()=>{
+            dispatch(addItem( {id : 1, name : 'Red Knit', count : 1} ))
+          }}>주문하기</button>
         </div>
       </Row>
       {/* 탭 UI 만들기 1.html css로 미리 디자인 2. 탭 상태 저장해둘 state 필요 3.state에 따라 UI가 어떻게 보일지 작성*/}
