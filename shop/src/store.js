@@ -11,9 +11,20 @@ let user = createSlice({
   // initialState : '실제state의값'
 
   name:'user',
-  initialState:'kim'
+  initialState:'kim',
 
+  // Redux의 state 변경하는법 - state 수정해주는 함수만들고
+  // 원할 때 그 함수 실행해달라고 store.js에 요청
+  reducers : {
+    changeName(state){
+      // 위의 state 수정하는 함수 - 작명은 내맘대로
+      return 'john kim' + state
+    },
+    // 함수1(){}
+  }
 })
+// 만든함수 export해야함
+export let { changeName } = user.actions
 
 let stock = createSlice({
   name:'stock',
@@ -21,7 +32,7 @@ let stock = createSlice({
 
 })
 
-let data = createSlice({
+let cart = createSlice({
   name:'data',
   initialState : [
     {id : 0, name : 'White and Black', count : 2},
@@ -35,7 +46,7 @@ export default configureStore({
     // 여기에 등록해야 사용가능
     user : user.reducer,
     stock : stock.reducer,
-    data : data.reducer,
+    cart : cart.reducer,
 
   }
 }) 
