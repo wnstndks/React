@@ -9,14 +9,20 @@ import reportWebVitals from './reportWebVitals';
 // 경로가 없는것들은 라이브러리
 import {BrowserRouter} from "react-router-dom";
 
+// Redux
+import {Provider} from "react-redux";
+import store from './store.js'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <Provider store={store}>
+    {/* App.js에서 store.js에 있던 state 전부 사용가능 */}
     <BrowserRouter>
     <App />
     </BrowserRouter>
-  </React.StrictMode>
+  </Provider>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -11,8 +11,11 @@ import DetailCard from "./routes/Detail.js";
 // ajax axios 불러오기
 import axios from "axios";
 
+// Cart.js 불러오기
+import Cart from './routes/Cart.js';
+
 // contextAPI를 쓰면 자식은 props없이 state 사용가능 1.createContext() 2. <Context>로 원하는 컴포넌트 감싸기
-export let Context1 = createContext();
+// export let Context1 = createContext();
 
 function App() {
   // 길고 복잡한 데이터들은 다른 js파일에 빼둘수 있음
@@ -21,12 +24,15 @@ function App() {
   // 페이지 이동도와주는 useNavigate() - 함수가 들어가있음
   let navigate = useNavigate();
 
-  let [재고] = useState([10, 11, 12]);
+  // let [재고] = useState([10, 11, 12]);
 
   // 페이지 나누는 법(리액트)
   // 컴포넌트 만들어서 상세페이지 내용 채움
   // 누가/detail 접속하면 그 컴포넌트 보여줌
   // react-router-dom 라이브러리 쓰기(라우팅)
+
+
+
   return (
     <div className="App">
       <Navbar bg="dark" data-bs-theme="dark">
@@ -119,15 +125,21 @@ function App() {
           path="/detail/:id"
           element={
             // ContextProvider - {}로 감싼것들은 props없이도 가져다 쓸수 있음
-            <Context1.Provider value={{재고, shoes}}>
               <DetailCard shoes={shoes} />
-            </Context1.Provider>
           }
         />
 
         {/* 누가 /detail로 접속할때 element안에 들어있는걸 보여줌 */}
         <Route path="*" element={<div>없는 페이지</div>} />
         {/* 없는 페이지 */}
+
+        {/* 장바구니 페이지 만들기 */}
+        <Route path="/detail/:id" element={
+          <DetailCard shoes={shoes}/>
+        }/>
+
+        <Route path="/cart" element={<Cart/>}/>
+
 
         {/* Nested Routes - 여러 페이지 필요할때, 여러 유사한 페이지 필요할 때, */}
 

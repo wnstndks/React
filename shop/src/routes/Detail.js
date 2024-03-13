@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { Button, Navbar, Nav, Col } from "react-bootstrap";
 
 // Context import
-import { Context1 } from "./../App.js";
+// import { Context1 } from "./../App.js";
 
 /* classname들을 styled-compoents 쓰면 JS파일에서 전부해결가능 */
 // let YellowBtn = styled.button`
@@ -39,7 +39,7 @@ import { Context1 } from "./../App.js";
 function DetailCard(props) {
 
   // state 사용은 useContext(Context)
-  let {재고, shoes}= useContext(Context1)
+  // let {재고, shoes}= useContext(Context1)
   
   // 컴포넌트에 갈고리 다는법
   // useEffect 안에 있는 코드는 랜더링이 되고 나서(html이 다 그려지고 나서) 나중에 실행이됨 - 위에서 임포트 안에는 함수 쓰기
@@ -207,7 +207,7 @@ function TabContent({ 탭, shoes}) {
 
   return (
     <div className={`start ${fade}`}>
-      {[<div>{shoes[0].title}</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]}
     </div>
   );
 }
