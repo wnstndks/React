@@ -2,7 +2,7 @@ import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 // state변경하기 위해 만든 함수 import 해서 사용
-import { changeName,changeAge } from "./../store.js";
+import { changeName,changeAge } from "./../store/userSlice.js"
 
 function Cart() {
   // store에 있던 componente가져다쓰기
@@ -24,7 +24,7 @@ function Cart() {
     <div>
       <h6>{state.user.name}{state.user.age}의 장바구니</h6>
       <button onClick={()=>{
-        dispatch(changeAge())
+        dispatch(changeAge(10))
       }}>버튼</button>
       <Table>
         <thead>
