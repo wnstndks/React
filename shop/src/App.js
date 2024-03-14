@@ -12,7 +12,7 @@ import DetailCard from "./routes/Detail.js";
 import axios from "axios";
 
 // Cart.js 불러오기
-import Cart from './routes/Cart.js';
+import Cart from "./routes/Cart.js";
 
 // contextAPI를 쓰면 자식은 props없이 state 사용가능 1.createContext() 2. <Context>로 원하는 컴포넌트 감싸기
 // export let Context1 = createContext();
@@ -30,8 +30,6 @@ function App() {
   // 컴포넌트 만들어서 상세페이지 내용 채움
   // 누가/detail 접속하면 그 컴포넌트 보여줌
   // react-router-dom 라이브러리 쓰기(라우팅)
-
-
 
   return (
     <div className="App">
@@ -76,12 +74,17 @@ function App() {
                   {shoes.map(function (a, i) {
                     return (
                       <Col key={i}>
-                        <img
-                          src={`https://codingapple1.github.io/shop/shoes${
-                            i + 1
-                          }.jpg`}
-                          width="80%"
-                        />
+                        <a href={`detail/${a.id}`}>
+                          {" "}
+                          <img
+                            src={`https://codingapple1.github.io/shop/shoes${
+                              i + 1
+                            }.jpg`}
+                            width="80%"
+                            alt={a.title}
+                          />
+                        </a>
+
                         <h4>{a.title}</h4>
                         <p>{a.price}</p>
                       </Col>
@@ -125,7 +128,7 @@ function App() {
           path="/detail/:id"
           element={
             // ContextProvider - {}로 감싼것들은 props없이도 가져다 쓸수 있음
-              <DetailCard shoes={shoes} />
+            <DetailCard shoes={shoes} />
           }
         />
 
@@ -134,13 +137,10 @@ function App() {
         {/* 없는 페이지 */}
 
         {/* 장바구니 페이지 만들기 */}
-        <Route path="/detail/:id" element={
-          <DetailCard shoes={shoes}/>
-        }/>
+        <Route path="/detail/:id" element={<DetailCard shoes={shoes} />} />
 
-        <Route path="/cart" element={<Cart/>}/>
-
-
+        {/* <Route path="/cart" element={<Cart/>}/> */}
+        <Route path="/cart" element={<Cart />} />
         {/* Nested Routes - 여러 페이지 필요할때, 여러 유사한 페이지 필요할 때, */}
 
         {/* <Route path="/about" element={<About/>}>

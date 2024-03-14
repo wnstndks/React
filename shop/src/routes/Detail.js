@@ -7,6 +7,8 @@ import { Button, Navbar, Nav, Col } from "react-bootstrap";
 // store.js에서 함수가져오기
 import { addItem } from "./../store";
 import { useDispatch } from "react-redux";
+import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
+import Cart from './Cart.js';
 
 // Context import
 // import { Context1 } from "./../App.js";
@@ -128,7 +130,7 @@ function DetailCard(props) {
       <Row>
         <div className="col-md-6">
           <img
-            src={`https://codingapple1.github.io/shop/shoes${찾은상품.id}.jpg`}
+            src={`https://codingapple1.github.io/shop/shoes${찾은상품.id+1}.jpg`}
             width="100%"
           />
         </div>
@@ -140,6 +142,7 @@ function DetailCard(props) {
           <p>{찾은상품.price}</p>
           <button className="btn btn-danger"
           onClick={()=>{
+
             dispatch(addItem( {id : 1, name : 'Red Knit', count : 1} ))
           }}>주문하기</button>
         </div>

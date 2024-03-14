@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeName,changeAge } from "./../store/userSlice.js"
 import { increaseCount } from "./../store.js";
 
+import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
+
+
 function Cart() {
   // store에 있던 componente가져다쓰기
   let state = useSelector((state) => {
