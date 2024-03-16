@@ -14,25 +14,23 @@ import axios from "axios";
 // Cart.js 불러오기
 import Cart from "./routes/Cart.js";
 
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+
 // contextAPI를 쓰면 자식은 props없이 state 사용가능 1.createContext() 2. <Context>로 원하는 컴포넌트 감싸기
 // export let Context1 = createContext();
 
 function App() {
-
-
   //  코드짜는법이란? 한글먼저 쓰고 코드로 옮김 - 상세히 설명할수록 코딩잘하는 것
-  useEffect(()=>{
-    localStorage.setItem('watched',JSON.stringify([]))
-  },[])
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify([]));
+  }, []);
   // 사이트 재접속시에도 데이터유지되게 만들려면 localStorage
 
   // // array/object 저장하려면 JSON으로 바꾸면 됨 -JSON은 그냥 object에 따옴표 쳐진것
   // let obj ={name:'kim'}
-  // localStorage.setItem('data',  JSON.stringify(obj)) //object->json 
+  // localStorage.setItem('data',  JSON.stringify(obj)) //object->json
   // let 꺼낸거 =localStorage.gettItem('data')
   // console.log(JSON.parse(꺼낸거)) //JSON->object
-
-
 
   // 길고 복잡한 데이터들은 다른 js파일에 빼둘수 있음
   let [shoes, setShoes] = useState(data);
@@ -46,6 +44,15 @@ function App() {
   // 컴포넌트 만들어서 상세페이지 내용 채움
   // 누가/detail 접속하면 그 컴포넌트 보여줌
   // react-router-dom 라이브러리 쓰기(라우팅)
+
+  // react-query
+  let result = useQuery("작명", () => {
+    return axios
+      .get("https://codingapple1.github.io/userdata.json")
+      .then((a) => {
+        return a.data;
+      });
+  });
 
   return (
     <div className="App">
@@ -71,6 +78,11 @@ function App() {
             </Nav.Link>
             {/* <Link to="/">Home</Link>
             <Link to="/detail">Detail</Link> */}
+          </Nav>
+          <Nav className="ms-auto">
+            {result.isLoading && "로딩중"}
+            {result.error && "에러남"}
+            {result.data && result.data.name}
           </Nav>
         </Container>
       </Navbar>
