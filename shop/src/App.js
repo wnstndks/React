@@ -3,18 +3,23 @@ import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container, Navbar, Nav, Col, Row } from "react-bootstrap";
-import { createContext, useEffect, useState } from "react";
+import { Suspense, createContext, lazy, useEffect, useState } from "react";
 // 경로는 무조건 ./ 부터
 import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
-import DetailCard from "./routes/Detail.js";
+
 // ajax axios 불러오기
 import axios from "axios";
 
 // Cart.js 불러오기
-import Cart from "./routes/Cart.js";
+// import Cart from "./routes/Cart.js";
+// import DetailCard from "./routes/Detail.js";
 
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+
+const DetailCard = lazy( () => import('./routes/Detail.js') )
+const Cart = lazy( () => import('./routes/Cart.js') )
+
 
 // contextAPI를 쓰면 자식은 props없이 state 사용가능 1.createContext() 2. <Context>로 원하는 컴포넌트 감싸기
 // export let Context1 = createContext();
@@ -88,7 +93,7 @@ function App() {
       </Navbar>
 
       {/* 페이지 이동버튼은 <Link> */}
-
+      <Suspense fallback = {<div>로딩중임</div>}>
       <Routes>
         {/* 라우트라는 컴포넌트는 페이지를 의미 */}
         {/* 페이지또한 컴포넌트로 만들면 좋음 */}
@@ -182,6 +187,7 @@ function App() {
           <Route path="two" element={<div>생일기념 쿠폰받기</div>}/>
         </Route> */}
       </Routes>
+      </Suspense>
     </div>
   );
 }
