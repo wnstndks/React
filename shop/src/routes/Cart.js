@@ -6,9 +6,24 @@ import { changeName,changeAge } from "./../store/userSlice.js"
 import { increaseCount } from "./../store.js";
 
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
+import { memo, useMemo, useState } from "react";
+
+
+// memo의 원리 - props가 변할때만 재랜더링해줌
+let Child = memo(function(){
+  console.log('재랜더링됨')
+  return <div>자식임</div>
+})
+
+function 함수(){
+  // return 반복문 10억번 돌린결과
+}
 
 
 function Cart() {
+  let result = useMemo(함수(),[state])
+
+
   // store에 있던 componente가져다쓰기
   let state = useSelector((state) => {
     return state;
@@ -18,6 +33,7 @@ function Cart() {
   // store.js로 요청을 보내주는 함수
   let dispatch = useDispatch()
 
+  let [count, setCount] = useState(0)
   // useSelector 편하게 쓰려면 함수를 store안에 있던 모든 state가
   // 되기에, 어떤 state만 가져다 쓸지를 확실히 해야함 {}안에 원하는 것만 골라서 가져다 쓸수 있음
 
@@ -26,6 +42,8 @@ function Cart() {
 
     // Redux사용시 컴포넌트들이 props없이 state공유가능
     <div>
+      <Child></Child>
+      <button onClick={()=>{setCount(count+1)}}>+++</button>
       <h6>{state.user.name}{state.user.age}의 장바구니</h6>
       <button onClick={()=>{
         dispatch(changeAge(10))
