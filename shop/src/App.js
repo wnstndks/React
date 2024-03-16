@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container, Navbar, Nav, Col, Row } from "react-bootstrap";
-import { Suspense, createContext, lazy, useEffect, useState } from "react";
+import { Suspense, createContext, lazy, useDeferredValue, useEffect, useState, useTransition } from "react";
 // 경로는 무조건 ./ 부터
 import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
@@ -25,6 +25,12 @@ const Cart = lazy( () => import('./routes/Cart.js') )
 // export let Context1 = createContext();
 
 function App() {
+
+  // startTransitino으로 문제의 state 변경 감싸기 ->성능 더 좋아짐
+  let [isPending,startTransition]=useTransition()
+  let state = useDeferredValue() //안에 들어가있는 state들을 늦게 처리해줌
+
+
   //  코드짜는법이란? 한글먼저 쓰고 코드로 옮김 - 상세히 설명할수록 코딩잘하는 것
   useEffect(() => {
     localStorage.setItem("watched", JSON.stringify([]));
