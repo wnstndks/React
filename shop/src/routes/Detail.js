@@ -102,11 +102,21 @@ function DetailCard(props) {
   //4. useEffect 실행전에 뭔가 실행하려면 언제나 return()=>{}
 
   let [input, setInput] = useState(true);
-
-
-
   
   let dispatch=useDispatch()
+
+
+  useEffect(()=>{
+    // 누가 Detail페이지 접속하면, 그 페이지에 보이는 상품id 가져와서
+    // 상품id를 localStorage에 watched 항목에 추가
+    console.log(찾은상품);
+    let 꺼낸거 = localStorage.getItem('watched',[찾은상품.id])
+    꺼낸거 = JSON.parse(꺼낸거)
+    꺼낸거.push(찾은상품.id) // array에 자료추가하는 문법
+    꺼낸거 = new Set(꺼낸거)
+    꺼낸거 = Array.from(꺼낸거)
+    localStorage.setItem('watched',JSON.stringify(꺼낸거))
+  },[])
 
 
   // 복사본을 하나 만들어내면 관리하기 매우 힘들기에 데이터는 한곳에만 잘 보관

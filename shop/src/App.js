@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container, Navbar, Nav, Col, Row } from "react-bootstrap";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 // 경로는 무조건 ./ 부터
 import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
@@ -18,6 +18,22 @@ import Cart from "./routes/Cart.js";
 // export let Context1 = createContext();
 
 function App() {
+
+
+  //  코드짜는법이란? 한글먼저 쓰고 코드로 옮김 - 상세히 설명할수록 코딩잘하는 것
+  useEffect(()=>{
+    localStorage.setItem('watched',JSON.stringify([]))
+  },[])
+  // 사이트 재접속시에도 데이터유지되게 만들려면 localStorage
+
+  // // array/object 저장하려면 JSON으로 바꾸면 됨 -JSON은 그냥 object에 따옴표 쳐진것
+  // let obj ={name:'kim'}
+  // localStorage.setItem('data',  JSON.stringify(obj)) //object->json 
+  // let 꺼낸거 =localStorage.gettItem('data')
+  // console.log(JSON.parse(꺼낸거)) //JSON->object
+
+
+
   // 길고 복잡한 데이터들은 다른 js파일에 빼둘수 있음
   let [shoes, setShoes] = useState(data);
 
