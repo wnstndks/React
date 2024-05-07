@@ -13,6 +13,8 @@ function App() {
     "파이썬 독학",
   ]);
 
+  let [좋아요,좋아요변경]=useState(0);
+
   return (
     <div className="App">
       <div className="black-nav">
@@ -20,7 +22,9 @@ function App() {
       </div>
       <div className="list">
         <h4>
-          {글제목[0]} <br />
+          {글제목[0]}
+          <br />
+          <span style={{'cursor':'pointer'}}onClick={()=>{좋아요변경(좋아요+1)}}>👍</span> {좋아요}
           <button className="bt-name">이름변경</button>
         </h4>
         <p>2월 17일 발행</p>
