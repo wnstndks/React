@@ -20,6 +20,8 @@ function App() {
     ]
   );
 
+  let [title,setTitle]=useState(0);
+
   let [좋아요, 좋아요변경] = useState([0,0,0]);
   let [modal, setModal] = useState(false);
   let [count, setCount] = useState(1);
@@ -47,6 +49,7 @@ function App() {
                 onClick={() => {
                   setCount(count + 1);
                   count % 2 != 0 ? setModal(true) : setModal(false);
+                  setTitle(i);
                 }}
               >
                 {글제목[i]}
@@ -81,17 +84,17 @@ function App() {
           </div>
         );
       })}
-      {modal == true ? <Modal></Modal> : null}
+      {modal == true ? <Modal title={title} 글제목={글제목}></Modal> : null}
     </div>
   );
 }
 
-function Modal() {
+function Modal(props) {
   return (
     <div className="modal">
-      <h4>제목</h4>
-      <p>날짜</p>
-      <p>상세내용</p>
+      <h4>제목: {props.글제목[props.title]}</h4>
+      <p>날짜: </p>
+      <p>상세내용: </p>
     </div>
   );
 }
