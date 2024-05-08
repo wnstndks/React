@@ -14,13 +14,14 @@ function App() {
   ]);
 
   let [좋아요, 좋아요변경] = useState(0);
-
+  let [modal, setModal] = useState(false);
+  let [count, setCount]=useState(1);
   return (
     <div className="App">
       <div className="black-nav">
         <div>개발 블로그</div>
         <button
-          className="bt-name"
+          className="bt-name mycursor"
           onClick={() => {
             let copy = [...글제목];
             copy.sort();
@@ -32,10 +33,14 @@ function App() {
       </div>
       <div className="list">
         <h4>
-          {글제목[0]}
+          <span className="mycursor" onClick={
+            ()=>{
+              setCount(count+1)
+              count%2!=0 ? setModal(true): setModal(false)
+            }}>{글제목[0]}</span>
           <br />
           <span
-            style={{ cursor: "pointer" }}
+            className="mycursor"
             onClick={() => {
               좋아요변경(좋아요 + 1);
             }}
@@ -44,7 +49,7 @@ function App() {
           </span>{" "}
           {좋아요}
           <button
-            className="bt-name"
+            className="bt-name mycursor"
             onClick={() => {
               // array, object 자료를 다룰 때는 원본 데이터를 직접 조작하는 것보다는 기존값은 보존해주는 식으로 코드짜는게 좋은 관습
               let copy = [...글제목];
@@ -68,19 +73,21 @@ function App() {
         <p>2월 17일 발행</p>
         <hr />
       </div>
-      <Modal></Modal>
+      { 
+         modal == true ? <Modal></Modal> : null
+      }
     </div>
   );
 }
 
-function Modal(){
-  return(
+function Modal() {
+  return (
     <div className="modal">
-        <h4>제목</h4>
-        <p>날짜</p>
-        <p>상세내용</p>
-      </div>
-  )
+      <h4>제목</h4>
+      <p>날짜</p>
+      <p>상세내용</p>
+    </div>
+  );
 }
 
 export default App;
