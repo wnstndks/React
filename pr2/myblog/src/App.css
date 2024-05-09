@@ -66,6 +66,7 @@ div{
   width:70px;
   border-radius: 10px;
   box-shadow: 5px 5px lightblue;
+  cursor: pointer;
 }
 
 .modal{
@@ -81,4 +82,18 @@ div{
 
 .plus{
   width:140px;
+}
+
+.input_tag{
+  margin:100px;
+}
+
+.bt-name2{
+  background-color: brown;
+  color:white;
+  border: none;
+  width: 50px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
