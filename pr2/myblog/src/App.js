@@ -26,6 +26,7 @@ function App() {
   let [count, setCount] = useState(1);
 
   let [입력값, 입력값변경] = useState("");
+  let [time,setTime]=useState(['2월 17일 발행','2월 17일 발행','2월 17일 발행']);
 
   return (
     <div className="App">
@@ -81,28 +82,57 @@ function App() {
                 이름변경
               </button>
             </h4>
-            <p>2월 17일 발행</p>
-            <button className="bt-name2" onClick={()=>{
-              let copy=[... 글제목];
-              copy.splice(i,1);
-              글제목변경(copy);
-            }}>삭제</button>
+            <p>{time[i]}</p>
+            <button
+              className="bt-name2"
+              onClick={() => {
+                let copy = [...글제목];
+                copy.splice(i, 1);
+                글제목변경(copy);
+              }}
+            >
+              삭제
+            </button>
             <hr />
           </div>
         );
       })}
       {modal == true ? <Modal title={title} 글제목={글제목}></Modal> : null}
       <div className="input_tag">
-          <input
+        <input
           onChange={(e) => {
             입력값변경(e.target.value);
             console.log(입력값);
           }}
-        /><button className="bt-name" onClick={(e)=>{
-          let copy=[... 글제목];
-          copy.unshift(입력값);
-          글제목변경(copy)
-        }}>글발행</button>
+        />
+        <button
+          className="bt-name"
+          onClick={(e) => {
+            try {
+              if (입력값 != "") {
+                let copy = [...글제목];
+                copy.unshift(입력값);
+                글제목변경(copy);
+                
+                let copy2=[...좋아요];
+                copy2.unshift(0);
+                좋아요변경(copy2);
+
+                let today=new Date()
+                let month=today.getMonth()+1;
+                let date=today.getDate();
+                let writedate=month+'월 '+date+'일 발행';
+                let copy3=[...time];
+                copy3.unshift(writedate);
+                setTime(copy3);
+              }
+            } catch (e) {
+              console.log(e);
+            }
+          }}
+        >
+          글발행
+        </button>
       </div>
     </div>
   );
