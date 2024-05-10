@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import { useState } from "react";
 import "./App.css";
+import { Navbar } from 'react-bootstrap';
 
 function App() {
   // 변수를 html에 꽂아넣을 때는 중괄호
@@ -43,6 +44,7 @@ function App() {
           가나다순 정렬 버튼
         </button>
       </div>
+
       {글제목.map((a, i) => {
         return (
           <div className="list" key={i}>
