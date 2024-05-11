@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+.main-bg {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  height : 200px;
+  background-image : url('./img/musinsa.jpg');
+  background-position : center;
+}
+.container2{
+  margin-top: 100px;
+}
