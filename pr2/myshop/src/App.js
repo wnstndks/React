@@ -6,7 +6,7 @@ import { useState } from "react";
 import data from "./data";
 
 function App() {
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
 
   return (
     <div className="App">
@@ -26,22 +26,24 @@ function App() {
       </div>
       <div className="container container2">
         <div className="row">
-          <div className="col-md-4">
-            <img
-              src="https://codingapple1.github.io/shop/shoes1.jpg"
-              width="80%"
-            />
-            <h4>{shoes[0].title}</h4>
-            <p>{shoes[0].price}</p>
-          </div>
-          <Modal shoes={shoes}></Modal>
-          <Modal shoes={shoes}></Modal>
-          <Modal shoes={shoes}></Modal>
+          {shoes.map((a, i) => {
+            return (
+              <div className="col-md-4" key={i}>
+                <img
+                  src={`https://codingapple1.github.io/shop/shoes${i+1}.jpg`}
+                  width="80%"
+                />
+                <h4>{a.title}</h4>
+                <p>{a.price}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
   );
 }
+
 function Modal(props) {
   <div className="col-md-4">
     <img src="https://codingapple1.github.io/shop/shoes3.jpg" width="80%" />
