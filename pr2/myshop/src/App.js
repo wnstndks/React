@@ -7,6 +7,7 @@ import data from "./data";
 
 function App() {
   let [shoes, setShoes] = useState(data);
+  let [title, setTitle]=useState(0);
 
   return (
     <div className="App">
@@ -26,18 +27,13 @@ function App() {
       </div>
       <div className="container container2">
         <div className="row">
-          {shoes.map((a, i) => {
+          {
+            shoes.map((a, i) => {
             return (
-              <div className="col-md-4" key={i}>
-                <img
-                  src={`https://codingapple1.github.io/shop/shoes${i+1}.jpg`}
-                  width="80%"
-                />
-                <h4>{a.title}</h4>
-                <p>{a.price}</p>
-              </div>
+              <Modal shoes={shoes} title={i}></Modal>
             );
-          })}
+          })
+          }
         </div>
       </div>
     </div>
@@ -45,10 +41,12 @@ function App() {
 }
 
 function Modal(props) {
+  return(
   <div className="col-md-4">
-    <img src="https://codingapple1.github.io/shop/shoes3.jpg" width="80%" />
-    <h4>{props.shoes.title}</h4>
-    <p>{props.shoes.price}</p>
-  </div>;
+    <img src={`https://codingapple1.github.io/shop/shoes${props.title+1}.jpg`} width="80%" />
+    <h4>{props.shoes[props.title].title}</h4>
+    <p>{props.shoes[props.title].price}</p>
+  </div>
+  );
 }
 export default App;
