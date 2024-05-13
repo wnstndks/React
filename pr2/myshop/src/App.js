@@ -4,8 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { NavDropdown, Navbar, Container, Nav } from "react-bootstrap";
 import { useState } from "react";
 import data from "./data";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
+import About from "./routes/About.js";
+
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -58,7 +60,12 @@ function App() {
           }
         />
         <Route path="/detail" element={<Detail />}></Route>
-        <Route path="/about" element={<div>어바웃페이지임</div>} />
+        <Route path="/event" element={<About/>}>
+          <Route path="one" element={<div>첫 주문시 무탠다드 무료 제공</div>}/>
+          <Route path="two" element={<div>회원가입 감사 쿠폰받기</div>}/>
+          
+        </Route>
+        <Route path="*" element={ <div>없는페이지임</div> } />
       </Routes>
     </div>
   );
