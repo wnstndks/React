@@ -5,6 +5,7 @@ import { NavDropdown, Navbar, Container, Nav } from "react-bootstrap";
 import { useState } from "react";
 import data from "./data";
 import { Routes, Route, Link } from "react-router-dom";
+import Detail from "./routes/Detail.js";
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -14,12 +15,11 @@ function App() {
     <div className="App">
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="#home">MyMusinsa</Navbar.Brand>
+          <Navbar.Brand href="/">MyMusinsa</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">profile</Nav.Link>
+              <Nav.Link href="/about">About</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -37,19 +37,27 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div>
-        <div className="main-bg"></div>
-      </div>
-      <div className="container container2">
-        <div className="row">
-          {shoes.map((a, i) => {
-            return <Modal shoes={shoes} title={i}></Modal>;
-          })}
-        </div>
-      </div>
-      <div style={{ height: "500px" }}></div>
+
       <Routes>
-        <Route path="/detail" element={<div>상세페이지임</div>} />
+        <Route
+          path="/"
+          element={
+            <div>
+              <div>
+                <div className="main-bg"></div>
+              </div>
+              <div className="container container2">
+                <div className="row">
+                  {shoes.map((a, i) => {
+                    return <Modal shoes={shoes} title={i}></Modal>;
+                  })}
+                </div>
+              </div>
+              <div style={{ height: "500px" }}></div>
+            </div>
+          }
+        />
+        <Route path="/detail" element={<Detail />}></Route>
         <Route path="/about" element={<div>어바웃페이지임</div>} />
       </Routes>
     </div>
