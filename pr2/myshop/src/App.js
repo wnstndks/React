@@ -11,7 +11,6 @@ import About from "./routes/About.js";
 
 function App() {
   let [shoes, setShoes] = useState(data);
-  let [title, setTitle] = useState(0);
 
   return (
     <div className="App">
@@ -23,9 +22,9 @@ function App() {
             <Nav className="me-auto">
               <Nav.Link href="/about">About</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
+                <NavDropdown.Item href="/event/one">Event1</NavDropdown.Item>
+                <NavDropdown.Item href="/event/two">
+                  Event2
                 </NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">
                   Something
@@ -55,11 +54,18 @@ function App() {
                   })}
                 </div>
               </div>
+              <button onClick={()=>{
+                let copy=[... shoes];
+                copy.sort((a, b) => a.title.localeCompare(b.title));
+                console.log(copy);
+                
+                setShoes(copy);
+              }}>상품명 정렬하기</button>
               <div style={{ height: "500px" }}></div>
             </div>
           }
         />
-        <Route path="/detail" element={<Detail />}></Route>
+        <Route path="/detail/:id" element={<Detail shoes={shoes}/>}></Route>
         <Route path="/event" element={<About/>}>
           <Route path="one" element={<div>첫 주문시 무탠다드 무료 제공</div>}/>
           <Route path="two" element={<div>회원가입 감사 쿠폰받기</div>}/>
