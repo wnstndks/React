@@ -40,6 +40,7 @@ function Detail(props) {
           <button className={`btn btn-danger ${styles.orderbutton}`}>주문하기</button>
         </div>
       </div>
+      <input className={`${styles.myinput}`}></input>
       
     </div>
   );

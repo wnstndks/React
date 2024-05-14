@@ -1,5 +1,5 @@
 import logo from "./logo.svg";
-import "./App.module.css";
+import styles from "./App.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavDropdown, Navbar, Container, Nav } from "react-bootstrap";
 import { useState } from "react";
@@ -13,7 +13,7 @@ function App() {
   let [shoes, setShoes] = useState(data);
 
   return (
-    <div className="App">
+    <div className={`${styles.App}`}>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="/">MyMusinsa</Navbar.Brand>
@@ -45,16 +45,16 @@ function App() {
           element={
             <div>
               <div>
-                <div className="main-bg"></div>
+                <div className={`${styles.main_bg}`}></div>
               </div>
-              <div className="container container2">
+              <div className={`container ${styles.container2}`}>
                 <div className="row">
                   {shoes.map((a, i) => {
                     return <Modal shoes={shoes} title={i}></Modal>;
                   })}
                 </div>
               </div>
-              <button onClick={()=>{
+              <button className={`${styles.btn} ${styles['btn-jelly']} ${styles['btn-fill']} ${styles['btn-open']} ${styles['btn-open-line']}`} onClick={()=>{
                 let copy=[... shoes];
                 copy.sort((a, b) => a.title.localeCompare(b.title));
                 console.log(copy);
@@ -78,15 +78,20 @@ function App() {
 }
 
 function Modal(props) {
+  const titleIndex = Number(props.title);
+
   return (
     <div className="col-md-4">
-      <img
-        src={`https://codingapple1.github.io/shop/shoes${props.title + 1}.jpg`}
-        width="100%"
-      />
-      <h4>{props.shoes[props.title].title}</h4>
-      <p>{props.shoes[props.title].price}</p>
+      <a href={`/detail/${titleIndex}`}>
+        <img
+          src={`https://codingapple1.github.io/shop/shoes${titleIndex + 1}.jpg`}
+          width="100%"
+        />
+      </a>
+      <h4>{props.shoes[titleIndex].title}</h4>
+      <p>{props.shoes[titleIndex].price}</p>
     </div>
   );
 }
+
 export default App;
