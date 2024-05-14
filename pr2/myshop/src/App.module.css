@@ -41,11 +41,33 @@
   margin-left: auto;
   margin-right: auto;
   height : 500px;
+  background-image : url('./img/musinsa.png');
+  background-position : center;
+  background-repeat: no-repeat;
+  background-color: black;
+  transition: background-color 10s ease; /* 애니메이션 속성 설정 */
+}
+
+.main_bg2 {
+  margin-left: auto;
+  margin-right: auto;
+  height : 500px;
   background-image : url('./img/musinsa.jpg');
   background-position : center;
   background-repeat: no-repeat;
   background-color: black;
 }
+
+.main_bg3 {
+  margin-left: auto;
+  margin-right: auto;
+  height : 500px;
+  background-image : url('./img/musinsa2.jpg');
+  background-position : center;
+  background-repeat: no-repeat;
+  background-color: white;
+}
+
 .container2{
   margin-top: 150px;
 }

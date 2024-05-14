@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import styles from "./App.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavDropdown, Navbar, Container, Nav } from "react-bootstrap";
-import { useState } from "react";
+import {useState, useEffect} from 'react';
 import data from "./data";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
@@ -11,6 +11,16 @@ import axios from "axios";
 
 function App() {
   let [shoes, setShoes] = useState(data);
+
+  useEffect(() => {
+    setTimeout(() => {
+      document.querySelector(`.${styles.main_bg}`).classList.add(styles.main_bg2);
+    }, 5000);
+  
+    setTimeout(() => {
+      document.querySelector(`.${styles.main_bg2}`).classList.add(styles.main_bg3);
+    }, 10000);
+  }, []);
 
   return (
     <div className={`${styles.App}`}>
@@ -45,6 +55,8 @@ function App() {
               <div>
                 <div className={`${styles.main_bg}`}></div>
               </div>
+
+
               <div className={`container ${styles.container2}`}>
                 <div className="row">
                   {shoes.map((a, i) => {
