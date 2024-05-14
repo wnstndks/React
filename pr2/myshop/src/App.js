@@ -1,5 +1,5 @@
 import logo from "./logo.svg";
-import "./App.css";
+import "./App.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavDropdown, Navbar, Container, Nav } from "react-bootstrap";
 import { useState } from "react";
