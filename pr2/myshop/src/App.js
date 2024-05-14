@@ -7,7 +7,7 @@ import data from "./data";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
 import About from "./routes/About.js";
-
+import axios from "axios";
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -23,9 +23,7 @@ function App() {
               <Nav.Link href="/about">About</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/event/one">Event1</NavDropdown.Item>
-                <NavDropdown.Item href="/event/two">
-                  Event2
-                </NavDropdown.Item>
+                <NavDropdown.Item href="/event/two">Event2</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">
                   Something
                 </NavDropdown.Item>
@@ -54,24 +52,44 @@ function App() {
                   })}
                 </div>
               </div>
-              <button className={`${styles.btn} ${styles['btn-jelly']} ${styles['btn-fill']} ${styles['btn-open']} ${styles['btn-open-line']}`} onClick={()=>{
-                let copy=[... shoes];
-                copy.sort((a, b) => a.title.localeCompare(b.title));
-                console.log(copy);
-                
-                setShoes(copy);
-              }}>상품명 정렬하기</button>
+              <button
+                className={`${styles.btn} ${styles["btn-jelly"]} ${styles["btn-fill"]} ${styles["btn-open"]} ${styles["btn-open-line"]}`}
+                onClick={() => {
+                  let copy = [...shoes];
+                  copy.sort((a, b) => a.title.localeCompare(b.title));
+                  console.log(copy);
+
+                  setShoes(copy);
+                }}
+              >
+                상품명 정렬하기
+              </button>
+              <button className={`${styles.mybutton}`}
+                onClick={() => {
+                  axios
+                    .get("https://codingapple1.github.io/shop/data2.json")
+                    .then((결과) => {
+                      console.log(결과.data);
+                      let copy=[... data, ...결과.data];
+                      setShoes(copy);
+                    })
+                    .catch(() => {
+                      console.log("실패함");
+                    });
+                }}
+              >
+                버튼
+              </button>
               <div style={{ height: "500px" }}></div>
             </div>
           }
         />
-        <Route path="/detail/:id" element={<Detail shoes={shoes}/>}></Route>
-        <Route path="/event" element={<About/>}>
-          <Route path="one" element={<div>첫 주문시 무탠다드 무료 제공</div>}/>
-          <Route path="two" element={<div>회원가입 감사 쿠폰받기</div>}/>
-          
+        <Route path="/detail/:id" element={<Detail shoes={shoes} />}></Route>
+        <Route path="/event" element={<About />}>
+          <Route path="one" element={<div>첫 주문시 무탠다드 무료 제공</div>} />
+          <Route path="two" element={<div>회원가입 감사 쿠폰받기</div>} />
         </Route>
-        <Route path="*" element={ <div>없는페이지임</div> } />
+        <Route path="*" element={<div>없는페이지임</div>} />
       </Routes>
     </div>
   );

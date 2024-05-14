@@ -51,87 +51,87 @@
 }
 
 .btn {
-  margin-top: 100px;
   margin: 1rem;
 }
 
-.btn-jelly {
-  &:hover {
-    animation: jelly 0.5s;
-  }
+.btn-jelly:hover {
+  animation: jelly 0.5s;
 }
 
 .btn-fill {
   transition: 0.3s;
+}
 
-  &:hover {
-    background: transparent;
-    box-shadow: inset 0 0 0 36px var(--btn-bg);
-  }
+.btn-fill:hover {
+  background: transparent;
+  box-shadow: inset 0 0 0 36px var(--btn-bg);
 }
 
 .btn-open {
   transition: 0.3s;
+}
 
-  &::before {
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    background: var(--btn-bg);
-    transform: scaleX(0);
-    transition: 0.3s;
-  }
+.btn-open::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: var(--btn-bg);
+  transform: scaleX(0);
+  transition: 0.3s;
+}
 
-  &:hover {
-    background: transparent;
+.btn-open:hover {
+  background: transparent;
+}
 
-    &::before {
-      transform: scaleX(1);
-    }
-  }
+.btn-open:hover::before {
+  transform: scaleX(1);
 }
 
 .btn-open-line {
   border: none;
   transition: 0.3s;
+}
 
-  margin-top: 100px;
-  &::before,
-  &::after {
-    position: absolute;
-    content: "";
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--btn-bg);
-    opacity: 0;
-    transform: scaleX(0);
-    transition: 0.4s ease-in-out;
-  }
+.btn-open-line::before,
+.btn-open-line::after {
+  position: absolute;
+  content: "";
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--btn-bg);
+  opacity: 0;
+  transform: scaleX(0);
+  transition: 0.4s ease-in-out;
+}
 
-  &::before {
-    top: 0;
-  }
+.btn-open-line::before {
+  top: 0;
+}
 
-  &::after {
-    bottom: 0;
-  }
+.btn-open-line::after {
+  bottom: 0;
+}
 
-  &:hover {
-    letter-spacing: 5px;
-    color: var(--btn-bg);
-    background: transparent;
+.btn-open-line:hover {
+  letter-spacing: 5px;
+  color: var(--btn-bg);
+  background: transparent;
+}
 
-    &::before,
-    &::after {
-      opacity: 1;
-      transform: scaleX(1.2);
-    }
-  }
+.btn-open-line:hover::before,
+.btn-open-line:hover::after {
+  opacity: 1;
+  transform: scaleX(1.2);
+}
+
+.button-container {
+  margin-top: 2rem; /* 버튼 컨테이너에 여백 추가 */
 }
 
 @keyframes jelly {
@@ -150,4 +150,16 @@
 
 :root {
   --btn-bg: #007bff; /* 기본 버튼 배경색 */
+}
+
+.mybutton{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  width: 100px;
+  border-radius: 10px;
 }
