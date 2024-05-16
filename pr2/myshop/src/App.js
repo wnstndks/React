@@ -11,6 +11,8 @@ import axios from "axios";
 
 function App() {
   let [shoes, setShoes] = useState(data);
+  let [count, setCount]=useState(1);
+  let [button, setButton]=useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -75,8 +77,12 @@ function App() {
               >
                 상품명 정렬하기
               </button>
-              <button className={`${styles.mybutton}`}
+              <button className={`${styles.mybutton}`} style={button ? { display: 'none' } : {}}
                 onClick={() => {
+
+                  setCount(count+1);
+                  console.log(count);
+                  if (count==1){
                   axios
                     .get("https://codingapple1.github.io/shop/data2.json")
                     .then((결과) => {
@@ -87,9 +93,22 @@ function App() {
                     .catch(() => {
                       console.log("실패함");
                     });
+                  }else if(count==2){
+                    axios
+                    .get("https://codingapple1.github.io/shop/data3.json")
+                    .then((결과) => {
+                      console.log(결과.data);
+                      let copy=[... shoes, ...결과.data];
+                      setShoes(copy);
+                      setButton(true);
+                    })
+                    .catch(() => {
+                      console.log("실패함");
+                    });
+                  }
                 }}
               >
-                버튼
+                상품 더보기
               </button>
               <div style={{ height: "500px" }}></div>
             </div>
