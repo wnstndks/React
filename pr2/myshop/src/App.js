@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import styles from "./App.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavDropdown, Navbar, Container, Nav } from "react-bootstrap";
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from "react";
 import data from "./data";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
@@ -11,17 +11,35 @@ import axios from "axios";
 
 function App() {
   let [shoes, setShoes] = useState(data);
-  let [count, setCount]=useState(1);
-  let [button, setButton]=useState(false);
+  let [count, setCount] = useState(1);
+  let [button, setButton] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      document.querySelector(`.${styles.main_bg}`).classList.add(styles.main_bg2);
-    }, 5000);
-  
-    setTimeout(() => {
-      document.querySelector(`.${styles.main_bg2}`).classList.add(styles.main_bg3);
+    const interval = setInterval(() => {
+      const mainBgElement = document.querySelector(`.${styles.main_bg}`);
+      const mainBg2Element = document.querySelector(`.${styles.main_bg2}`);
+      const mainBg3Element = document.querySelector(`.${styles.main_bg3}`);
+
+      if (mainBgElement && mainBgElement.classList.contains(styles.main_bg)) {
+        mainBgElement.classList.remove(styles.main_bg);
+        mainBgElement.classList.add(styles.main_bg2);
+      } else if (
+        mainBg2Element &&
+        mainBg2Element.classList.contains(styles.main_bg2)
+      ) {
+        mainBg2Element.classList.remove(styles.main_bg2);
+        mainBg2Element.classList.add(styles.main_bg3);
+      } else if (
+        mainBg3Element &&
+        mainBg3Element.classList.contains(styles.main_bg3)
+      ) {
+        mainBg3Element.classList.remove(styles.main_bg3);
+        mainBg3Element.classList.add(styles.main_bg);
+      }
     }, 10000);
+
+    // 컴포넌트가 언마운트될 때 타이머 정리
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -57,7 +75,6 @@ function App() {
                 <div className={`${styles.main_bg}`}></div>
               </div>
 
-
               <div className={`container ${styles.container2}`}>
                 <div className="row">
                   {shoes.map((a, i) => {
@@ -77,34 +94,35 @@ function App() {
               >
                 상품명 정렬하기
               </button>
-              <button className={`${styles.mybutton}`} style={button ? { display: 'none' } : {}}
+              <button
+                className={`${styles.mybutton}`}
+                style={button ? { display: "none" } : {}}
                 onClick={() => {
-
-                  setCount(count+1);
+                  setCount(count + 1);
                   console.log(count);
-                  if (count==1){
-                  axios
-                    .get("https://codingapple1.github.io/shop/data2.json")
-                    .then((결과) => {
-                      console.log(결과.data);
-                      let copy=[... data, ...결과.data];
-                      setShoes(copy);
-                    })
-                    .catch(() => {
-                      console.log("실패함");
-                    });
-                  }else if(count==2){
+                  if (count == 1) {
                     axios
-                    .get("https://codingapple1.github.io/shop/data3.json")
-                    .then((결과) => {
-                      console.log(결과.data);
-                      let copy=[... shoes, ...결과.data];
-                      setShoes(copy);
-                      setButton(true);
-                    })
-                    .catch(() => {
-                      console.log("실패함");
-                    });
+                      .get("https://codingapple1.github.io/shop/data2.json")
+                      .then((결과) => {
+                        console.log(결과.data);
+                        let copy = [...data, ...결과.data];
+                        setShoes(copy);
+                      })
+                      .catch(() => {
+                        console.log("실패함");
+                      });
+                  } else if (count == 2) {
+                    axios
+                      .get("https://codingapple1.github.io/shop/data3.json")
+                      .then((결과) => {
+                        console.log(결과.data);
+                        let copy = [...shoes, ...결과.data];
+                        setShoes(copy);
+                        setButton(true);
+                      })
+                      .catch(() => {
+                        console.log("실패함");
+                      });
                   }
                 }}
               >
