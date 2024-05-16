@@ -1,6 +1,4 @@
 .mybox{
-  border: 1px solid black;
-  border-radius: 30px;
   padding:30px;
   margin-top: 30px;
 }
@@ -10,6 +8,8 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  width: 145px;
+  height: 50px;
 }
 .myinput{
   display: block;
@@ -18,4 +18,7 @@
   margin-top: 100px;
   width: 500px;
   height: 100px;
+}
+.shoesimage{
+  margin-top: 150px;
 }

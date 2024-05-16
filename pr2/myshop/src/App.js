@@ -13,6 +13,7 @@ function App() {
   let [shoes, setShoes] = useState(data);
   let [count, setCount] = useState(1);
   let [button, setButton] = useState(false);
+  let [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -132,6 +133,7 @@ function App() {
             </div>
           }
         />
+        
         <Route path="/detail/:id" element={<Detail shoes={shoes} />}></Route>
         <Route path="/event" element={<About />}>
           <Route path="one" element={<div>첫 주문시 무탠다드 무료 제공</div>} />

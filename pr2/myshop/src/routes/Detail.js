@@ -29,7 +29,7 @@ function Detail(props) {
         <div className="col-md-6">
           <img
             src={`https://codingapple1.github.io/shop/shoes${찾은상품.id+1}.jpg`}
-            width="100%"
+            width="100%" className={`${styles.shoesimage}`}
           />
         </div>
         <div className={`col-md-6 ${styles.mybox}`}>
@@ -37,11 +37,10 @@ function Detail(props) {
           <p>{찾은상품.content}</p>
           <p>{찾은상품.description}</p>
           <p>{찾은상품.price} 원</p>
-          <button className={`btn btn-danger ${styles.orderbutton}`}>주문하기</button>
         </div>
+        <button className={`btn btn-danger ${styles.orderbutton}`}>주문하기</button>
+        
       </div>
-      <input className={`${styles.myinput}`}></input>
-      
     </div>
   );
 }
