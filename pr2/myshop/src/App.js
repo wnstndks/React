@@ -46,7 +46,6 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
       <Routes>
         <Route
           path="/"
