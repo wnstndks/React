@@ -6,7 +6,12 @@ import { useState, useEffect } from "react";
 
 function Detail(props) {
   let [alert, setAlert] = useState(true);
-  let [탭, 탭변경] = useState(0);
+  let [탭, 탭변경]=useState(0);
+  let [fade, setFade]=useState('');
+
+  useEffect(()=>{
+    setFade('end')
+  }, [탭])
 
   useEffect(() => {
     setTimeout(() => {
@@ -39,59 +44,36 @@ function Detail(props) {
           <h4 className="pt-5">{찾은상품.title}</h4>
           <p>{찾은상품.content}</p>
           <p>{찾은상품.description}</p>
-          <p>{찾은상품.price} 원</p>
+          <p>{찾은상품.price} $</p>
         </div>
         <button className={`btn btn-danger ${styles.orderbutton}`}>
-          주문하기
+          Order
         </button>
       </div>
-      <div style={{ height: "100px" }} />
+      <div style={{'height':'100px'}}/>
 
-      <Nav variant="tabs" defaultActiveKey="link0">
-        <Nav.Item>
-          <Nav.Link
-            onClick={() => {
-              탭변경(0);
-            }}
-            eventKey="link0"
-          >
-            버튼0
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link
-            onClick={() => {
-              탭변경(1);
-            }}
-            eventKey="link1"
-          >
-            버튼1
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link
-            onClick={() => {
-              탭변경(2);
-            }}
-            eventKey="link2"
-          >
-            버튼2
-          </Nav.Link>
-        </Nav.Item>
-      </Nav>
-      <TabContent 탭={탭} />
+      <Nav variant="pills"  defaultActiveKey="/link0">
+    <Nav.Item>
+      <Nav.Link onClick={()=>{ 탭변경(0) }} eventKey="link0">info1</Nav.Link>
+    </Nav.Item>
+    <Nav.Item>
+      <Nav.Link onClick={()=>{ 탭변경(1) }} eventKey="link1">info2</Nav.Link>
+    </Nav.Item>
+</Nav>
+      <TabContent className={`${styles.start} ${styles.end}`} 탭={탭}/>
     </div>
   );
 }
-function TabContent(props) {
-  if (props.탭 === 0) {
-    return <div>내용0</div>;
+function TabContent(props){
+  if (props.탭 === 0){
+    return <div>
+
+      수정중
+
+    </div>
   }
-  if (props.탭 === 1) {
-    return <div>내용1</div>;
-  }
-  if (props.탭 === 2) {
-    return <div>내용2</div>;
+  if (props.탭 === 1){
+    return <div>내용1</div>
   }
 }
 export default Detail;
