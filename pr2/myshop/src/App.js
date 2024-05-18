@@ -7,6 +7,7 @@ import data from "./data";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
 import About from "./routes/About.js";
+import Musinsa from "./routes/Musinsa.js";
 import axios from "axios";
 
 function App() {
@@ -136,7 +137,9 @@ function App() {
         
         <Route path="/detail/:id" element={<Detail shoes={shoes} />}></Route>
         <Route path="/event" element={<About />}>
-          <Route path="one" element={<div>첫 주문시 무탠다드 무료 제공</div>} />
+          <Route path="one" element={
+            <Musinsa element={shoes={shoes}}/>
+          } />
           <Route path="two" element={<div>회원가입 감사 쿠폰받기</div>} />
         </Route>
         <Route path="*" element={<div>없는페이지임</div>} />

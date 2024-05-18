@@ -6,12 +6,12 @@ import { useState, useEffect } from "react";
 
 function Detail(props) {
   let [alert, setAlert] = useState(true);
-  let [탭, 탭변경]=useState(0);
-  let [fade, setFade]=useState('');
+  let [탭, 탭변경] = useState(0);
+  let [fade, setFade] = useState("");
 
-  useEffect(()=>{
-    setFade('end')
-  }, [탭])
+  useEffect(() => {
+    setFade("end");
+  }, [탭]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -50,30 +50,40 @@ function Detail(props) {
           Order
         </button>
       </div>
-      <div style={{'height':'100px'}}/>
+      <div style={{ height: "100px" }} />
 
-      <Nav variant="pills"  defaultActiveKey="/link0">
-    <Nav.Item>
-      <Nav.Link onClick={()=>{ 탭변경(0) }} eventKey="link0">info1</Nav.Link>
-    </Nav.Item>
-    <Nav.Item>
-      <Nav.Link onClick={()=>{ 탭변경(1) }} eventKey="link1">info2</Nav.Link>
-    </Nav.Item>
-</Nav>
-      <TabContent className={`${styles.start} ${styles.end}`} 탭={탭}/>
+      <Nav variant="pills" defaultActiveKey="/link0">
+        <Nav.Item>
+          <Nav.Link
+            onClick={() => {
+              탭변경(0);
+            }}
+            eventKey="link0"
+          >
+            info1
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            onClick={() => {
+              탭변경(1);
+            }}
+            eventKey="link1"
+          >
+            info2
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <TabContent className={`${styles.start} ${styles.end}`} 탭={탭} />
     </div>
   );
 }
-function TabContent(props){
-  if (props.탭 === 0){
-    return <div>
-
-      수정중
-
-    </div>
+function TabContent(props) {
+  if (props.탭 === 0) {
+    return <div>수정중</div>;
   }
-  if (props.탭 === 1){
-    return <div>내용1</div>
+  if (props.탭 === 1) {
+    return <div>수정중2</div>;
   }
 }
 export default Detail;
