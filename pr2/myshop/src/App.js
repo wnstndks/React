@@ -8,6 +8,7 @@ import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
 import About from "./routes/About.js";
 import Musinsa from "./routes/Musinsa.js";
+import Cart from "./routes/Cart.js";
 import axios from "axios";
 
 function App() {
@@ -142,6 +143,7 @@ function App() {
           } />
           <Route path="two" element={<div>회원가입 감사 쿠폰받기</div>} />
         </Route>
+        <Route path="/cart" element={ <Cart/> } /> 
         <Route path="*" element={<div>없는페이지임</div>} />
       </Routes>
     </div>
