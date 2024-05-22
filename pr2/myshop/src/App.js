@@ -119,12 +119,14 @@ function App() {
                       .get("https://codingapple1.github.io/shop/data3.json")
                       .then((결과) => {
                         console.log(결과.data);
+                        console.log(shoes);
                         let copy = [...shoes, ...결과.data];
                         setShoes(copy);
                         setButton(true);
                       })
-                      .catch(() => {
+                      .catch((e) => {
                         console.log("실패함");
+                        console.log(e)
                       });
                   }
                 }}
