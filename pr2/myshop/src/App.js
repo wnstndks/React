@@ -53,7 +53,7 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/about">About</Nav.Link>
+              <Nav.Link href="/cart">Cart</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/event/one">Event1</NavDropdown.Item>
                 <NavDropdown.Item href="/event/two">Event2</NavDropdown.Item>
@@ -81,17 +81,16 @@ function App() {
               <div className={`container ${styles.container2}`}>
                 <div className="row">
                   {shoes.map((a, i) => {
-                    return <Modal shoes={shoes} title={i}></Modal>;
+                    return <Modal key={i} shoes={shoes} title={i}></Modal>;
                   })}
                 </div>
               </div>
               <button
                 className={`${styles.btn} ${styles["btn-jelly"]} ${styles["btn-fill"]} ${styles["btn-open"]} ${styles["btn-open-line"]}`}
                 onClick={() => {
-                  let copy = [...shoes];
+                  let copy = [... shoes];
                   copy.sort((a, b) => a.title.localeCompare(b.title));
                   console.log(copy);
-
                   setShoes(copy);
                 }}
               >
@@ -107,8 +106,7 @@ function App() {
                     axios
                       .get("https://codingapple1.github.io/shop/data2.json")
                       .then((결과) => {
-                        console.log(결과.data);
-                        let copy = [...data, ...결과.data];
+                        let copy = [...shoes, ...결과.data];
                         setShoes(copy);
                       })
                       .catch(() => {
@@ -117,12 +115,10 @@ function App() {
                   } else if (count == 2) {
                     axios
                       .get("https://codingapple1.github.io/shop/data3.json")
-                      .then((결과) => {
-                        console.log(결과.data);
-                        console.log(shoes);
-                        let copy = [...shoes, ...결과.data];
-                        setShoes(copy);
+                      .then((결과2) => {
                         setButton(true);
+                        let copy = [...shoes, ...결과2.data];
+                        setShoes(copy);
                       })
                       .catch((e) => {
                         console.log("실패함");

@@ -3,12 +3,16 @@ import { NavDropdown, Navbar, Container, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import styles from "./Detail.module.css";
 import { useState, useEffect } from "react";
+import {addItem} from "./Store.js";
+import { useDispatch } from "react-redux";
 
 function Detail(props) {
   let [alert, setAlert] = useState(true);
   let [탭, 탭변경] = useState(0);
   let [fade, setFade] = useState("");
 
+  let dispatch=useDispatch();
+  
   useEffect(() => {
     setFade("end");
   }, [탭]);
@@ -31,7 +35,7 @@ function Detail(props) {
         <div className="alert alert-warning">2초 이내 구매시 할인</div>
       ) : null}
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-6" style={{ marginTop: "-70px" }}>
           <img
             src={`https://codingapple1.github.io/shop/shoes${
               찾은상품.id + 1
@@ -40,15 +44,19 @@ function Detail(props) {
             className={`${styles.shoesimage}`}
           />
         </div>
-        <div className={`col-md-6 ${styles.mybox}`}>
+        <div className="col-md-6">
           <h4 className="pt-5">{찾은상품.title}</h4>
           <p>{찾은상품.content}</p>
-          <p>{찾은상품.description}</p>
-          <p>{찾은상품.price} $</p>
+          <p>{찾은상품.price}원</p>
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              dispatch(addItem({ id: 1, name: "Red Knit", count: 1 }));
+            }}
+          >
+            주문하기
+          </button>
         </div>
-        <button className={`btn btn-danger ${styles.orderbutton}`}>
-          Order
-        </button>
       </div>
       <div style={{ height: "100px" }} />
 
