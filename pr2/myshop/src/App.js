@@ -17,53 +17,46 @@ function App() {
   let [button, setButton] = useState(false);
   let [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const mainBgElement = document.querySelector(`.${styles.main_bg}`);
-      const mainBg2Element = document.querySelector(`.${styles.main_bg2}`);
-      const mainBg3Element = document.querySelector(`.${styles.main_bg3}`);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     const mainBgElement = document.querySelector(`.${styles.main_bg}`);
+  //     const mainBg2Element = document.querySelector(`.${styles.main_bg2}`);
+  //     const mainBg3Element = document.querySelector(`.${styles.main_bg3}`);
 
-      if (mainBgElement && mainBgElement.classList.contains(styles.main_bg)) {
-        mainBgElement.classList.remove(styles.main_bg);
-        mainBgElement.classList.add(styles.main_bg2);
-      } else if (
-        mainBg2Element &&
-        mainBg2Element.classList.contains(styles.main_bg2)
-      ) {
-        mainBg2Element.classList.remove(styles.main_bg2);
-        mainBg2Element.classList.add(styles.main_bg3);
-      } else if (
-        mainBg3Element &&
-        mainBg3Element.classList.contains(styles.main_bg3)
-      ) {
-        mainBg3Element.classList.remove(styles.main_bg3);
-        mainBg3Element.classList.add(styles.main_bg);
-      }
-    }, 10000);
+  //     if (mainBgElement && mainBgElement.classList.contains(styles.main_bg)) {
+  //       mainBgElement.classList.remove(styles.main_bg);
+  //       mainBgElement.classList.add(styles.main_bg2);
+  //     } else if (
+  //       mainBg2Element &&
+  //       mainBg2Element.classList.contains(styles.main_bg2)
+  //     ) {
+  //       mainBg2Element.classList.remove(styles.main_bg2);
+  //       mainBg2Element.classList.add(styles.main_bg3);
+  //     } else if (
+  //       mainBg3Element &&
+  //       mainBg3Element.classList.contains(styles.main_bg3)
+  //     ) {
+  //       mainBg3Element.classList.remove(styles.main_bg3);
+  //       mainBg3Element.classList.add(styles.main_bg);
+  //     }
+  //   }, 10000);
 
-    // 컴포넌트가 언마운트될 때 타이머 정리
-    return () => clearInterval(interval);
-  }, []);
+  //   // 컴포넌트가 언마운트될 때 타이머 정리
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <div className={`${styles.App}`}>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="/">MyMusinsa</Navbar.Brand>
+          <Navbar.Brand href="/" style={{fontWeight:'bolder'}}>MusinsaWeb</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/cart">Cart</Nav.Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <Nav.Link href="/cart" style={{fontWeight:'bold'}}>Cart</Nav.Link>
+              <NavDropdown title="Dropdown" style={{fontWeight:'bold'}} id="basic-nav-dropdown">
                 <NavDropdown.Item href="/event/one">Event1</NavDropdown.Item>
                 <NavDropdown.Item href="/event/two">Event2</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
