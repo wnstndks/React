@@ -22,6 +22,6 @@ let data=[
       description:"Arey Yordan is a premium and stylish shoe born in the United States. This product exemplifies American craftsmanship, blending contemporary design with superior comfort and durability. Perfect for both everyday wear and special occasions, Arey Yordan ensures you step out in style no matter the setting.",
       price : 130000
     }
-  ] 
+] 
 
 export default data;

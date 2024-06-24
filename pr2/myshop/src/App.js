@@ -3,7 +3,7 @@ import styles from "./App.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavDropdown, Navbar, Container, Nav } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import data from "./data";
+import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
 import About from "./routes/About.js";
@@ -15,46 +15,25 @@ function App() {
   let [shoes, setShoes] = useState(data);
   let [count, setCount] = useState(1);
   let [button, setButton] = useState(false);
-  let [isLoading, setIsLoading] = useState(true);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     const mainBgElement = document.querySelector(`.${styles.main_bg}`);
-  //     const mainBg2Element = document.querySelector(`.${styles.main_bg2}`);
-  //     const mainBg3Element = document.querySelector(`.${styles.main_bg3}`);
-
-  //     if (mainBgElement && mainBgElement.classList.contains(styles.main_bg)) {
-  //       mainBgElement.classList.remove(styles.main_bg);
-  //       mainBgElement.classList.add(styles.main_bg2);
-  //     } else if (
-  //       mainBg2Element &&
-  //       mainBg2Element.classList.contains(styles.main_bg2)
-  //     ) {
-  //       mainBg2Element.classList.remove(styles.main_bg2);
-  //       mainBg2Element.classList.add(styles.main_bg3);
-  //     } else if (
-  //       mainBg3Element &&
-  //       mainBg3Element.classList.contains(styles.main_bg3)
-  //     ) {
-  //       mainBg3Element.classList.remove(styles.main_bg3);
-  //       mainBg3Element.classList.add(styles.main_bg);
-  //     }
-  //   }, 10000);
-
-  //   // 컴포넌트가 언마운트될 때 타이머 정리
-  //   return () => clearInterval(interval);
-  // }, []);
 
   return (
     <div className={`${styles.App}`}>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="/" style={{fontWeight:'bolder'}}>MusinsaWeb</Navbar.Brand>
+          <Navbar.Brand href="/" style={{ fontWeight: "bolder" }}>
+            Musinsa
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/cart" style={{fontWeight:'bold'}}>Cart</Nav.Link>
-              <NavDropdown title="Dropdown" style={{fontWeight:'bold'}} id="basic-nav-dropdown">
+              <Nav.Link href="/cart" style={{ fontWeight: "bold" }}>
+                Cart
+              </Nav.Link>
+              <NavDropdown
+                title="Dropdown"
+                style={{ fontWeight: "bold" }}
+                id="basic-nav-dropdown"
+              >
                 <NavDropdown.Item href="/event/one">Event1</NavDropdown.Item>
                 <NavDropdown.Item href="/event/two">Event2</NavDropdown.Item>
               </NavDropdown>
@@ -79,22 +58,27 @@ function App() {
                 </div>
               </div>
               <button
-                className={`${styles.btn} ${styles["btn-jelly"]} ${styles["btn-fill"]} ${styles["btn-open"]} ${styles["btn-open-line"]}`}
                 onClick={() => {
-                  let copy = [... shoes];
-                  copy.sort((a, b) => a.title.localeCompare(b.title));
-                  console.log(copy);
-                  setShoes(copy);
+                  console.log(shoes)
+                  let copy=[...shoes.title]
+                  console.log(copy)
+
                 }}
               >
                 상품명 정렬하기
               </button>
               <button
                 className={`${styles.mybutton}`}
-                style={button ? { display: "none" } : {}}
                 onClick={() => {
                   setCount(count + 1);
                   console.log(count);
+                  {
+                    /* html에서 public 폴더 이미지 사용할땐 그냥/이미지경로 */
+                    /* 나중에 사이트를 발행하고 싶을 때는 문제 없지만, 서브 경로에다 발행시에는 문제가 생길 수 있음.. */
+                    /* 그래서 경로를 수정해야할수도 
+                    따라서 밑의 경로처럼 쓰기 */
+                    // {process.env.PUBLIC_URL+'/이미지 경로'}
+                  }
                   if (count == 1) {
                     axios
                       .get("https://codingapple1.github.io/shop/data2.json")
@@ -115,7 +99,7 @@ function App() {
                       })
                       .catch((e) => {
                         console.log("실패함");
-                        console.log(e)
+                        console.log(e);
                       });
                   }
                 }}
@@ -126,15 +110,16 @@ function App() {
             </div>
           }
         />
-        
+
         <Route path="/detail/:id" element={<Detail shoes={shoes} />}></Route>
         <Route path="/event" element={<About />}>
-          <Route path="one" element={
-            <Musinsa element={shoes={shoes}}/>
-          } />
+          <Route
+            path="one"
+            element={<Musinsa element={(shoes = { shoes })} />}
+          />
           <Route path="two" element={<div>회원가입 감사 쿠폰받기</div>} />
         </Route>
-        <Route path="/cart" element={ <Cart/> } /> 
+        <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<div>없는페이지임</div>} />
       </Routes>
     </div>
