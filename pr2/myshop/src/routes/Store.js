@@ -21,11 +21,14 @@ let cart = createSlice({
   name : 'cart',
   initialState : [
     {id : 0, name : 'White and Black', count : 2},
-    {id : 2, name : 'Grey Yordan', count : 1}
+    {id : 2, name : 'Grey Yordan', count : 1},
   ],
   reducers : {
     addCount(state, action){
-      state[action.payload].count++
+      let item = state.find(item => item.id === action.payload);
+      if (item) {
+        item.count++;
+      }
     },
     addItem(state, action){
       state.push(action.payload)

@@ -22,13 +22,13 @@ function Cart() {
       <tbody>
         {state.cart.map((a, i) => (
           <tr key={i}>
-            <td>{state.cart[i].id}</td>
-            <td>{state.cart[i].name}</td>
-            <td>{state.cart[i].count}</td>
+            <td>{a.id}</td>
+            <td>{a.name}</td>
+            <td>{a.count}</td>
             <td>
               <button
                 onClick={() => {
-                  dispatch(addCount(state.cart[i].id)) 
+                  dispatch(addCount(a.id)) 
                 }}
               >
                 +
