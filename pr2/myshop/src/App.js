@@ -127,7 +127,7 @@ function Modal(props) {
   const titleIndex = Number(props.title);
   
   return (
-    <div className="col-md-4">
+    <div className={`col-md-4 ${styles.imgcontainer}`}>
       <a href={`/detail/${titleIndex}`}>
         <img
           src={`https://codingapple1.github.io/shop/shoes${titleIndex + 1}.jpg`}
