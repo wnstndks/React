@@ -21,11 +21,22 @@ let cart = createSlice({
       state[번호].count++
     },
     addItem(state, action){
+      let 번호= state.findIndex((a)=>a.id==action.payload.id)
+      // findIndex는 조건을 만족하는 요소가 없으면 -1을 반환
+      if(번호 !== -1){
+        state[번호].count++
+      }else{
       state.push(action.payload)
+    }
+    },
+    deleteItem(state,action){
+      let 번호=state.findIndex((a)=>action.payload)
+      state.splice(번호)      
+
     }
   }
 }) 
-export let {addCount,addItem} = cart.actions
+export let {addCount,addItem,deleteItem} = cart.actions
 
 export default configureStore({
   reducer: { 

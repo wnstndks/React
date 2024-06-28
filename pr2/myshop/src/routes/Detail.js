@@ -1,18 +1,18 @@
-import { Link, useParams } from "react-router-dom";
-import { NavDropdown, Navbar, Container, Nav } from "react-bootstrap";
-import styled from "styled-components";
+import { useNavigate, useParams } from "react-router-dom";
+import { Nav } from "react-bootstrap";
 import styles from "./Detail.module.css";
 import { useState, useEffect } from "react";
-import {addItem} from "./Store.js";
-import { useDispatch } from "react-redux";
+import { addItem } from "./Store.js";
+import { useDispatch, useSelector } from "react-redux";
 
 function Detail(props) {
   let [alert, setAlert] = useState(true);
   let [탭, 탭변경] = useState(0);
   let [fade, setFade] = useState("");
+  let state = useSelector((state) => state.cart);
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
 
-  let dispatch=useDispatch();
-  
   useEffect(() => {
     setFade("end");
   }, [탭]);
@@ -28,6 +28,8 @@ function Detail(props) {
   let 찾은상품 = props.shoes.find((x) => {
     return x.id == id;
   });
+
+  console.log(state);
 
   return (
     <div className="container">
@@ -51,13 +53,26 @@ function Detail(props) {
           <button
             className="btn btn-danger"
             onClick={() => {
-              dispatch(addItem({ id: 찾은상품.id, name: 찾은상품.title, count: 1 }))
+              dispatch(
+                addItem({ id: 찾은상품.id, name: 찾은상품.title, count: 1 })
+              );
             }}
           >
             주문하기
           </button>
         </div>
       </div>
+
+      {/* useNavigate는 페이지 이동시켜주는 함수 */}
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          navigate("/cart"); // 장바구니 페이지로 이동
+        }}
+      >
+        장바구니로 이동
+      </button>
+
       <div style={{ height: "100px" }} />
 
       <Nav variant="pills" defaultActiveKey="/link0">

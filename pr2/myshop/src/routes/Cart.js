@@ -1,7 +1,8 @@
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addCount} from "./Store.js";
+import { addCount, deleteItem} from "./Store.js";
 import {changeName, addAge} from '../store/userSlice.js'
+import { Link } from "react-router-dom";
 
 function Cart() {
   // Redux store 가져옴
@@ -25,6 +26,7 @@ function Cart() {
             <th>상품명</th>
             <th>수량</th>
             <th>변경하기</th>
+            <th>삭제하기</th>
           </tr>
         </thead>
         <tbody>
@@ -42,6 +44,12 @@ function Cart() {
                   +
                 </button>
               </td>
+              <td>
+                <span style={{cursor: 'pointer'}} onClick={()=>{
+                  dispatch(deleteItem(a.id))
+                }}>
+                🗑️
+                </span></td>
             </tr>
           ))}
         </tbody>
