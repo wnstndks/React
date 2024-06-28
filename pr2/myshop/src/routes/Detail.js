@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { NavDropdown, Navbar, Container, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import styles from "./Detail.module.css";
@@ -51,7 +51,7 @@ function Detail(props) {
           <button
             className="btn btn-danger"
             onClick={() => {
-              dispatch(addItem({ id: 1, name: "Red Knit", count: 1 }));
+              dispatch(addItem({ id: 찾은상품.id, name: 찾은상품.title, count: 1 }))
             }}
           >
             주문하기

@@ -1,16 +1,8 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
+import user from '../store/userSlice'
+// redux 쓰는 이유
+// 컴포넌트간 state 공유 편해짐
 
-let user= createSlice({
-    name:'user',
-    initialState:'kim',
-    reducers:{
-      changeName(state){
-        return 'john'+state
-      }
-    }
-})
-
-export let { changeName } = user.actions 
 
 let stock= createSlice({
     name:'stock',
@@ -25,10 +17,8 @@ let cart = createSlice({
   ],
   reducers : {
     addCount(state, action){
-      let item = state.find(item => item.id === action.payload);
-      if (item) {
-        item.count++;
-      }
+      let 번호= state.findIndex((a)=>a.id==action.payload)
+      state[번호].count++
     },
     addItem(state, action){
       state.push(action.payload)
@@ -39,6 +29,7 @@ export let {addCount,addItem} = cart.actions
 
 export default configureStore({
   reducer: { 
+    // 작명 : state이름.reducer
     user : user.reducer,
     stock : stock.reducer,
     cart : cart.reducer
